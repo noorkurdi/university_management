@@ -31,6 +31,7 @@ class AppAssets {
   static const String profileBackGroundPic =
       'assets/images/masks/Mask_Group_15.png';
   static const String wpuLogo = 'assets/images/logo/wpu_logo.png';
+  static const String profileImage = 'assets/images/profile.png';
 }
 
 class AppMaps {
@@ -44,4 +45,17 @@ class AppMaps {
     6: 'السبت',
     7: 'الأحد',
   };
+}
+
+class AppLists {
+  AppLists._();
+
+  static const List<String> years = [
+    "الأولى",
+    "الثانية",
+    "الثالثة",
+    "الرابعة",
+    "الخامسة",
+    "الكل",
+  ];
 }

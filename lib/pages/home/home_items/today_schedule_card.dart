@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:university_management/core/utils/app_constants.dart';
-import 'package:university_management/pages/home/subject_info_row.dart';
+import 'package:university_management/pages/home/home_items/subject_info_row.dart';
 
 class TodayScheduleCard extends StatelessWidget {
   const TodayScheduleCard({
     super.key,
+    required this.secondTitle,
+    required this.thirdTitle,
   });
-
+  final String secondTitle, thirdTitle;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -23,21 +25,22 @@ class TodayScheduleCard extends StatelessWidget {
               ),
             ),
             color: Colors.white,
-            child: const Padding(
-              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 12),
+            child:  Padding(
+              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 12),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SubjectInfoRow(
+                  const SubjectInfoRow(
                     title: "اسم المادة :",
                     info: "subject name",
                   ),
                   SubjectInfoRow(
-                    title: "وقت المادة :",
+                    title: secondTitle,
                     info: "subject time",
                   ),
                   SubjectInfoRow(
-                    title: "رقم القاعة :",
+                    title: thirdTitle,
                     info: "204",
                   ),
                 ],

@@ -16,7 +16,7 @@ class CustomTextField extends StatelessWidget {
   final void Function(String)? onFieldSubmitted;
   final TextInputAction? textInputAction;
   final List<TextInputFormatter>? inputFormatters;
-  
+
   const CustomTextField(
       {Key? key,
       this.validation,

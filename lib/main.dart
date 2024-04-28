@@ -7,6 +7,7 @@ import 'package:university_management/pages/home/home_page.dart';
 import 'package:university_management/pages/root_page.dart';
 import 'package:university_management/provider/auth/login_provider.dart';
 import 'package:university_management/provider/navigation_bar_provider.dart';
+import 'package:university_management/provider/schedule/schedule_provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,6 +30,8 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => NavigationBarProvider(),
+        ), ChangeNotifierProvider(
+          create: (context) => ScheduleProvider(),
         )
       ],
       child: MaterialApp(

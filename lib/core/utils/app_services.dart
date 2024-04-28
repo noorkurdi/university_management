@@ -38,7 +38,7 @@ class AppValidations {
   static String? Function(String?)? passwordValidation = (value) {
     if (value!.isEmpty || value == '') {
       return "هذا الحقل مطلوب";
-    } else if (value.length < 8) {
+    } else if (value.length < 6) {
       return 'يجب أن تتكون كلمة السر  على الأقل من 6 أحرف';
     } else {
       return null;

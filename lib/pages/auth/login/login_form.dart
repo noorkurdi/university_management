@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:university_management/core/utils/app_constants.dart';
 import 'package:university_management/core/utils/app_services.dart';
 import 'package:university_management/provider/auth/login_provider.dart';
@@ -48,7 +47,7 @@ class LoginForm extends StatelessWidget {
           CustomTextField(
               validation: AppValidations.requiredValidation,
               isPassword: provider.isPasswordShow,
-              keyboardType: TextInputType.text,
+              keyboardType: TextInputType.visiblePassword,
               focusNode: provider.passwordFocusNode,
               textInputAction: TextInputAction.done,
               onFieldSubmitted: (value) async {
@@ -63,7 +62,7 @@ class LoginForm extends StatelessWidget {
                 onPressed: () {
                   provider.showPassword();
                 },
-              )),
+              ),),
           const SizedBox(
             height: 60,
           ),

@@ -1,6 +1,5 @@
-
 import 'package:flutter/material.dart';
-import 'package:university_management/pages/home/today_schedule_card.dart';
+import 'package:university_management/pages/home/home_items/today_schedule_card.dart';
 
 class TodayScheduleList extends StatelessWidget {
   const TodayScheduleList({
@@ -20,7 +19,10 @@ class TodayScheduleList extends StatelessWidget {
         },
         itemCount: 5,
         itemBuilder: (context, index) {
-          return const TodayScheduleCard();
+          return const TodayScheduleCard(
+            secondTitle: "وقت المادة :",
+            thirdTitle: "القاعة :",
+          );
         },
       ),
     );
