@@ -31,6 +31,8 @@ class AppAssets {
   static const String profileBackGroundPic =
       'assets/images/masks/Mask_Group_15.png';
   static const String wpuLogo = 'assets/images/logo/wpu_logo.png';
+  static const String numbersIcon = 'assets/images/icons/numbers_svg.svg';
+  static const String collageIcon = 'assets/images/icons/collage.svg';
   static const String profileImage = 'assets/images/profile.png';
 }
 
