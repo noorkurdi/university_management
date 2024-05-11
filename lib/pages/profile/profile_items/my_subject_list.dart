@@ -3,7 +3,7 @@ import 'package:university_management/core/utils/media_query_values.dart';
 import 'package:university_management/pages/profile/profile_items/my_subject_card.dart';
 
 class MySubjectList extends StatelessWidget {
-  const MySubjectList({
+  const  MySubjectList({
     super.key,
   });
 
