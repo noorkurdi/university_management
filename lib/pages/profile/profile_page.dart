@@ -3,18 +3,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:university_management/core/utils/app_constants.dart';
 import 'package:university_management/core/utils/media_query_values.dart';
 import 'package:university_management/pages/profile/profile_items/background_image.dart';
 import 'package:university_management/pages/profile/profile_items/my_subject_list.dart';
 import 'package:university_management/pages/profile/profile_items/profile_info_list_tile.dart';
 import 'package:university_management/pages/profile/profile_items/profile_photo.dart';
+import 'package:university_management/provider/auth/my_details_provider.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final myDetails = Provider.of<MyDetalisProvider>(context);
     return SingleChildScrollView(
       child: Stack(
         alignment: Alignment.topCenter,
@@ -40,8 +43,8 @@ class ProfilePage extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            const FaIcon(
-                              FontAwesomeIcons.four,
+                            FaIcon(
+                              AppMaps.yearIcons[myDetails.student!.year],
                               size: 20,
                             ),
                             const SizedBox(
@@ -67,13 +70,13 @@ class ProfilePage extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 30),
-                    const ProfileInfoListTile(
-                      icon: ProfilePhoto(
+                    ProfileInfoListTile(
+                      icon: const ProfilePhoto(
                         iconsize: 18,
                         radius: 14,
                       ),
                       subTitle: "الاسم",
-                      title: "Noor",
+                      title: myDetails.student!.name,
                     ),
                     ProfileInfoListTile(
                       icon: CircleAvatar(
@@ -86,7 +89,7 @@ class ProfilePage extends StatelessWidget {
                         ),
                       ),
                       subTitle: "الرقم الجامعي",
-                      title: "201910608",
+                      title: myDetails.student!.uniNumber,
                     ),
                     ProfileInfoListTile(
                       icon: CircleAvatar(
@@ -103,7 +106,7 @@ class ProfilePage extends StatelessWidget {
                         ),
                       ),
                       subTitle: "الكلية",
-                      title: "هندسة حاسوب",
+                      title: myDetails.student!.collage.name,
                     ),
                     const SizedBox(height: 10),
                     const Align(
@@ -125,7 +128,7 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
           const Padding(
-            padding: EdgeInsets.only(top: 50),
+            padding: EdgeInsets.only(top: 20),
             child: ProfilePhoto(
               iconsize: 60,
               radius: 50,

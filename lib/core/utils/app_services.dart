@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AppServices {
   AppServices._();
 
-    static double _getScaleFactor(BuildContext context) {
+  static double _getScaleFactor(BuildContext context) {
     double width = MediaQuery.sizeOf(context).width;
     if (width < 600) {
       return width / 400;
@@ -23,8 +23,54 @@ class AppServices {
     double upperLimit = fontSize * 1.2;
     return responsiveFontSize.clamp(lowerLimit, upperLimit);
   }
-}
 
+  static List<T> getListFromJson<T>(Map<String, dynamic> jsonData,
+      T Function(Map<String, dynamic>) fromJson) {
+    List<dynamic> jsonList = jsonData['data'] as List<dynamic>;
+    return jsonList
+        .map((item) => fromJson(item as Map<String, dynamic>))
+        .toList();
+  }
+
+  static ScaffoldFeatureController<SnackBar, SnackBarClosedReason>
+      successSnackBar({required BuildContext context, required String title}) {
+    return ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          title,
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+          textAlign: TextAlign.right,
+        ),
+        backgroundColor: Colors.green,
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  }
+
+  static ScaffoldFeatureController<SnackBar, SnackBarClosedReason>
+      errorSncakBar({
+    required BuildContext context,
+    required String title,
+  }) {
+    return ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          title,
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+          textAlign: TextAlign.right,
+        ),
+        backgroundColor: Colors.red,
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  }
+}
 
 class AppValidations {
   static String? Function(String?)? requiredValidation = (value) {
@@ -44,7 +90,6 @@ class AppValidations {
       return null;
     }
   };
-
 
   static passwordConfirmationValidation(String? value, String confirmation) {
     if (value!.isEmpty || value == '') {

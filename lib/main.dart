@@ -6,8 +6,10 @@ import 'package:university_management/pages/auth/login/login_page.dart';
 import 'package:university_management/pages/home/home_page.dart';
 import 'package:university_management/pages/root_page.dart';
 import 'package:university_management/provider/auth/login_provider.dart';
-import 'package:university_management/provider/navigation_bar_provider.dart';
+import 'package:university_management/provider/auth/my_details_provider.dart';
+import 'package:university_management/provider/other/navigation_bar_provider.dart';
 import 'package:university_management/provider/schedule/schedule_provider.dart';
+import 'package:university_management/provider/subjects/my_subjects_provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,16 +32,23 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => NavigationBarProvider(),
-        ), ChangeNotifierProvider(
+        ),
+        ChangeNotifierProvider(
           create: (context) => ScheduleProvider(),
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (context) => MyDetalisProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => MySubjectsProvider(),
+        ),
       ],
       child: MaterialApp(
         title: 'University management',
         theme: ThemeData(
           fontFamily: AppStrings.appFont,
         ),
-        home: const RootPage(),
+        home: const LoginPage(),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AppKeys {
   AppKeys._();
@@ -15,7 +16,9 @@ class AppColors {
 
 class AppStrings {
   AppStrings._();
+  static const String baseUrl = 'http://localhost:3000/api';
   static const String appFont = "ElMessiri";
+  static const String tokenKey = "token";
 }
 
 class AppAssets {
@@ -46,6 +49,14 @@ class AppMaps {
     5: 'الجمعة',
     6: 'السبت',
     7: 'الأحد',
+  };
+
+    static const Map<int, dynamic> yearIcons = {
+    1: FontAwesomeIcons.one,
+    2: FontAwesomeIcons.two,
+    3: FontAwesomeIcons.three,
+    4: FontAwesomeIcons.four,
+    5: FontAwesomeIcons.five,
   };
 }
 

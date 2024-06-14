@@ -1,14 +1,17 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:university_management/core/utils/app_constants.dart';
-import 'package:university_management/provider/navigation_bar_provider.dart';
+import 'package:university_management/provider/other/navigation_bar_provider.dart';
+import 'package:university_management/provider/subjects/my_subjects_provider.dart';
 
 class CustomNavigationBar extends StatelessWidget {
   const CustomNavigationBar({
     super.key,
     required this.provider,
+    required this.mySubjectsProvider,
   });
   final NavigationBarProvider provider;
+  final MySubjectsProvider mySubjectsProvider;
   @override
   Widget build(BuildContext context) {
     return CurvedNavigationBar(
@@ -20,6 +23,9 @@ class CustomNavigationBar extends StatelessWidget {
       onTap: (value) {
         if (value == provider.currentHomeIndex) {
           return;
+        }
+        if (value == 1) {
+          mySubjectsProvider.getMySubjects();
         }
         provider.pageChange(value);
       },
