@@ -5,29 +5,33 @@ import 'package:university_management/core/enums/connection_enum.dart';
 import 'package:university_management/core/utils/app_constants.dart';
 import 'package:university_management/core/utils/app_services.dart';
 import 'package:university_management/dio/dio_helpers.dart';
-import 'package:university_management/models/subjects/student_subject_model.dart';
+import 'package:university_management/models/schedule/my_schedule_model.dart';
 
-class MySubjectsProvider extends ChangeNotifier {
-  List<MySubjectModel> mySubjects = [];
+class TodayScheduleProvider extends ChangeNotifier {
+  List<MyScheduleModel> todaySchedule = [];
   ConnectionEnum? connectionEnum;
   String errorMessage = '';
 
-  Future<void> getMySubjects() async {
+  Future<void> getTodaySchedule() async {
     connectionEnum = ConnectionEnum.connecting;
     notifyListeners();
     try {
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
       String token = sharedPreferences.getString(AppStrings.tokenKey)!;
-      Response<dynamic> response = await DioHelper.mySubjects(token: token);
-      List<MySubjectModel> subjects =
-          AppServices.getListFromJson<MySubjectModel>(
+      int day = DateTime.now().weekday;
+      int today = AppMaps.weekOfDay[day]!;
+      print(today);
+      Response<dynamic> response =
+          await DioHelper.todaySchedule(token: token, day: today);
+      List<MyScheduleModel> schedule =
+          AppServices.getListFromJson<MyScheduleModel>(
         response.data,
-        (item) => MySubjectModel.fromMap(item),
+        (item) => MyScheduleModel.fromMap(item),
       );
-      mySubjects = subjects;
+      todaySchedule = schedule;
       connectionEnum = ConnectionEnum.connected;
-      print(mySubjects);
+      print(todaySchedule);
       notifyListeners();
     } on DioException catch (e) {
       connectionEnum = ConnectionEnum.error;

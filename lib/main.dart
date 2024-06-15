@@ -9,7 +9,10 @@ import 'package:university_management/provider/auth/login_provider.dart';
 import 'package:university_management/provider/auth/my_details_provider.dart';
 import 'package:university_management/provider/other/navigation_bar_provider.dart';
 import 'package:university_management/provider/schedule/schedule_provider.dart';
+import 'package:university_management/provider/schedule/today_schedule_provider.dart';
+import 'package:university_management/provider/subjects/add_subjects_provider.dart';
 import 'package:university_management/provider/subjects/my_subjects_provider.dart';
+import 'package:university_management/provider/subjects/not_my_subjects_provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,6 +44,15 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => MySubjectsProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => TodayScheduleProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => NotMySubjectsProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AddSubjectsProvider(),
         ),
       ],
       child: MaterialApp(

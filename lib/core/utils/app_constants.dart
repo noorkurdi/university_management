@@ -51,7 +51,17 @@ class AppMaps {
     7: 'الأحد',
   };
 
-    static const Map<int, dynamic> yearIcons = {
+  static const Map<int, int> weekOfDay = {
+    1: 3,
+    2: 4,
+    3: 5,
+    4: 6,
+    5: 7,
+    6: 1,
+    7: 2,
+  };
+
+  static const Map<int, dynamic> yearIcons = {
     1: FontAwesomeIcons.one,
     2: FontAwesomeIcons.two,
     3: FontAwesomeIcons.three,

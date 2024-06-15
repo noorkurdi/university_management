@@ -45,4 +45,42 @@ class DioHelper {
       ),
     );
   }
+
+  static Future<Response> notMySubjects({
+    required String token,
+  }) async {
+    return await dio.get(
+      NOT_MY_SUBJECTS,
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+  }
+
+  static Future<Response> addSubjects({
+    required String token,
+    required List<Map<String, dynamic>> data,
+  }) async {
+    return await dio.post(
+      ADD_SUBJECT,
+      data: data,
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+  }
+
+  //////////SCHEDULE///////////
+  static Future<Response> todaySchedule({
+    required String token,
+    required int day,
+  }) async {
+    return await dio.get(
+      TODAY_SCHEUDLE,
+      queryParameters: {"day": day},
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+  }
 }

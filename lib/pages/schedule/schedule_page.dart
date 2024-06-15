@@ -36,19 +36,19 @@ class SchedulePage extends StatelessWidget {
           const SizedBox(
             height: 15,
           ),
-          SizedBox(
-            height: context.height - 200,
-            width: double.infinity,
-            child: ListView.builder(
-              itemBuilder: (context, index) {
-                return const TodayScheduleCard(
-                  secondTitle: "اليوم :",
-                  thirdTitle: "وقت المادة :",
-                );
-              },
-              itemCount: 8,
-            ),
-          ),
+          // SizedBox(
+          //   height: context.height - 200,
+          //   width: double.infinity,
+          //   child: ListView.builder(
+          //     itemBuilder: (context, index) {
+          //       return const TodayScheduleCard(
+          //         secondTitle: "اليوم :",
+          //         thirdTitle: "وقت المادة :",
+          //       );
+          //     },
+          //     itemCount: 8,
+          //   ),
+          // ),
         ],
       ),
     );

@@ -3,9 +3,14 @@ import 'package:intl/intl.dart';
 import 'package:university_management/core/utils/app_constants.dart';
 import 'package:university_management/core/utils/media_query_values.dart';
 import 'package:university_management/pages/home/home_items/today_schedule_list.dart';
+import 'package:university_management/provider/schedule/today_schedule_provider.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage({
+    super.key,
+    required this.todaySchedule,
+  });
+  final TodayScheduleProvider todaySchedule;
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +75,9 @@ class HomePage extends StatelessWidget {
               const SizedBox(
                 height: 15,
               ),
-              const TodayScheduleList()
+               TodayScheduleList(
+                todaySchedule: todaySchedule,
+               )
             ],
           ),
         ),

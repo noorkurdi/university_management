@@ -6,6 +6,7 @@ import 'package:university_management/core/utils/app_services.dart';
 import 'package:university_management/pages/root_page.dart';
 import 'package:university_management/provider/auth/login_provider.dart';
 import 'package:university_management/provider/auth/my_details_provider.dart';
+import 'package:university_management/provider/schedule/today_schedule_provider.dart';
 import 'package:university_management/widgets/custom_linear_button.dart';
 import 'package:university_management/widgets/custom_text_field_widget.dart';
 import 'package:university_management/widgets/show_password_icon.dart';
@@ -17,6 +18,7 @@ class LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final myDetails = Provider.of<MyDetalisProvider>(context);
+    final todaySchedule = Provider.of<TodayScheduleProvider>(context);
     return Form(
       key: AppKeys.loginKey,
       child: Column(
@@ -58,6 +60,7 @@ class LoginForm extends StatelessWidget {
               await provider.login(
                 onSuccess: () async {
                   await myDetails.getMyDetails();
+                  await todaySchedule.getTodaySchedule();
                   if (context.mounted) {
                     Navigator.pushAndRemoveUntil(
                         context,
@@ -96,6 +99,7 @@ class LoginForm extends StatelessWidget {
                 await provider.login(
                   onSuccess: () async {
                     await myDetails.getMyDetails();
+                    await todaySchedule.getTodaySchedule();
                     if (context.mounted) {
                       Navigator.pushAndRemoveUntil(
                           context,

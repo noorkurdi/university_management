@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:university_management/core/utils/app_constants.dart';
 import 'package:university_management/provider/other/navigation_bar_provider.dart';
+import 'package:university_management/provider/schedule/today_schedule_provider.dart';
 import 'package:university_management/provider/subjects/my_subjects_provider.dart';
 
 class CustomNavigationBar extends StatelessWidget {
@@ -9,9 +10,11 @@ class CustomNavigationBar extends StatelessWidget {
     super.key,
     required this.provider,
     required this.mySubjectsProvider,
+    required this.todaySchedule,
   });
   final NavigationBarProvider provider;
   final MySubjectsProvider mySubjectsProvider;
+  final TodayScheduleProvider todaySchedule;
   @override
   Widget build(BuildContext context) {
     return CurvedNavigationBar(
@@ -24,8 +27,11 @@ class CustomNavigationBar extends StatelessWidget {
         if (value == provider.currentHomeIndex) {
           return;
         }
-        if (value == 1) {
+        if (value == 1 || value == 0) {
           mySubjectsProvider.getMySubjects();
+        }
+        if (value == 3) {
+          todaySchedule.getTodaySchedule();
         }
         provider.pageChange(value);
       },

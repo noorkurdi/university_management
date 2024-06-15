@@ -6,18 +6,25 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:university_management/core/utils/app_constants.dart';
 import 'package:university_management/core/utils/media_query_values.dart';
+import 'package:university_management/pages/add_subjects/add_subject_page.dart';
 import 'package:university_management/pages/profile/profile_items/background_image.dart';
 import 'package:university_management/pages/profile/profile_items/my_subject_list.dart';
 import 'package:university_management/pages/profile/profile_items/profile_info_list_tile.dart';
 import 'package:university_management/pages/profile/profile_items/profile_photo.dart';
 import 'package:university_management/provider/auth/my_details_provider.dart';
+import 'package:university_management/provider/subjects/my_subjects_provider.dart';
+import 'package:university_management/provider/subjects/not_my_subjects_provider.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
-
+  const ProfilePage({
+    super.key,
+    required this.mySubjects,
+  });
+  final MySubjectsProvider mySubjects;
   @override
   Widget build(BuildContext context) {
     final myDetails = Provider.of<MyDetalisProvider>(context);
+    final notMySubjectsProvider = Provider.of<NotMySubjectsProvider>(context);
     return SingleChildScrollView(
       child: Stack(
         alignment: Alignment.topCenter,
@@ -109,19 +116,43 @@ class ProfilePage extends StatelessWidget {
                       title: myDetails.student!.collage.name,
                     ),
                     const SizedBox(height: 10),
-                    const Align(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        ": موادي",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        IconButton(
+                          onPressed: ()async {
+                            await notMySubjectsProvider.getNotMySubjects();
+                            if (context.mounted) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => AddSubjectsPage(
+                                    notMySubjects: notMySubjectsProvider,
+                                  ),
+                                ),
+                              );
+                            }
+                          },
+                          icon: const Icon(
+                            Icons.add,
+                            color: Colors.black,
+                          ),
                         ),
-                      ),
+                        const Text(
+                          ": موادي",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 10),
-                    const Expanded(child: MySubjectList())
+                    Expanded(
+                        child: MySubjectList(
+                      mySubjectsProvider: mySubjects,
+                    ))
                   ],
                 ),
               ),
