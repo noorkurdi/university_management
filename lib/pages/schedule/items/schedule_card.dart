@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:university_management/core/utils/app_constants.dart';
-import 'package:university_management/models/schedule/my_schedule_model.dart';
+import 'package:university_management/models/schedule/all_schedule_model.dart';
 import 'package:university_management/pages/home/home_items/subject_info_row.dart';
 
-class TodayScheduleCard extends StatelessWidget {
-  const TodayScheduleCard({
+class ScheduleCard extends StatelessWidget {
+  const ScheduleCard({
     super.key,
     required this.scheduleModel,
   });
-  final MyScheduleModel scheduleModel;
+
+  final AllSchdeuleModel scheduleModel;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -38,26 +39,31 @@ class TodayScheduleCard extends StatelessWidget {
                     height: 20,
                   ),
                   SubjectInfoRow(
-                    title: "عدد المحاضرات اليوم :",
-                    info: scheduleModel.subject.schedule.length.toString(),
+                    title: "اليوم : ",
+                    info: AppMaps.days[scheduleModel.day]!,
                   ),
-                  Column(
-                    children: scheduleModel.subject.schedule.map((e) {
-                      return Column(
-                        children: [
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          SubjectInfoRow(
-                            title:
-                                "${scheduleModel.subject.schedule.indexOf(e) + 1} : ",
-                            info:
-                                "من ${e.startTime} حتى ${e.endTime} \n                قاعة : ${e.place}",
-                          ),
-                        ],
-                      );
-                    }).toList(),
-                  )
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  SubjectInfoRow(
+                    title: "الوقت : ",
+                    info:
+                        "من ${scheduleModel.startTime} حتى ${scheduleModel.endTime}",
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  SubjectInfoRow(
+                    title: "القاعة : ",
+                    info: scheduleModel.place,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  SubjectInfoRow(
+                    title: "السنة :",
+                    info: scheduleModel.subject.year.toString(),
+                  ),
                 ],
               ),
             )),

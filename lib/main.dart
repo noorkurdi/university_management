@@ -5,6 +5,8 @@ import 'package:university_management/core/utils/app_constants.dart';
 import 'package:university_management/pages/auth/login/login_page.dart';
 import 'package:university_management/pages/home/home_page.dart';
 import 'package:university_management/pages/root_page.dart';
+import 'package:university_management/provider/auth/change_email_provider.dart';
+import 'package:university_management/provider/auth/change_password_provider.dart';
 import 'package:university_management/provider/auth/login_provider.dart';
 import 'package:university_management/provider/auth/my_details_provider.dart';
 import 'package:university_management/provider/other/navigation_bar_provider.dart';
@@ -53,6 +55,12 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => AddSubjectsProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ChangeEmailProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ChangePasswordProvider(),
         ),
       ],
       child: MaterialApp(

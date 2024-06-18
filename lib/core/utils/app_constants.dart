@@ -4,6 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class AppKeys {
   AppKeys._();
   static GlobalKey<FormState> loginKey = GlobalKey<FormState>();
+  static GlobalKey<FormState> changeEmailKey = GlobalKey<FormState>();
+  static GlobalKey<FormState> changePasswordKey = GlobalKey<FormState>();
 }
 
 class AppColors {
@@ -51,6 +53,16 @@ class AppMaps {
     7: 'الأحد',
   };
 
+  static const Map<int, String> days = {
+    1: 'السبت',
+    2: 'الأحد',
+    3: 'الاثنين',
+    4: 'الثلاثاء',
+    5: 'الأربعاء',
+    6: 'الخميس',
+    7: 'الجمعة',
+  };
+
   static const Map<int, int> weekOfDay = {
     1: 3,
     2: 4,
@@ -73,7 +85,7 @@ class AppMaps {
 class AppLists {
   AppLists._();
 
-  static const List<String> years = [
+  static const List<String> stringYears = [
     "الأولى",
     "الثانية",
     "الثالثة",
@@ -81,4 +93,13 @@ class AppLists {
     "الخامسة",
     "الكل",
   ];
+    static const List<int> years = [1, 2, 3, 4, 5];
+}
+
+class AppRegExp {
+  AppRegExp._();
+  static RegExp passwordRegex = RegExp(r'^(?=.*[A-Za-z])(?=.*\d).+$');
+  static RegExp emailRegex =
+      RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
+  static RegExp phoneNumberRegex = RegExp(r'^09\d{8}$');
 }

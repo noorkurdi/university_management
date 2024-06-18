@@ -5,14 +5,16 @@ import 'package:university_management/core/utils/app_constants.dart';
 class SearchField extends StatelessWidget {
   const SearchField({
     super.key,
+    required this.onChanged,
   });
-
+  final Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       onTapOutside: (event) {
         FocusManager.instance.primaryFocus?.unfocus();
       },
+      onChanged: onChanged,
       textDirection: TextDirection.rtl,
       cursorColor: Colors.grey[700],
       decoration: InputDecoration(

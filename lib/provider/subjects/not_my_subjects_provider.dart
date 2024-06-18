@@ -12,8 +12,9 @@ class NotMySubjectsProvider extends ChangeNotifier {
   ConnectionEnum? connectionEnum;
   String errorMessage = '';
 
-  Future<void> getNotMySubjects() async {
+  Stream<List<NotMySubjectModel>> getNotMySubjects() async* {
     connectionEnum = ConnectionEnum.connecting;
+    print("connecting");
     notifyListeners();
     try {
       SharedPreferences sharedPreferences =
@@ -28,11 +29,15 @@ class NotMySubjectsProvider extends ChangeNotifier {
       notMySubjects = subjects;
       connectionEnum = ConnectionEnum.connected;
       print(notMySubjects);
+      print("connected");
       notifyListeners();
+      yield subjects;
     } on DioException catch (e) {
       connectionEnum = ConnectionEnum.error;
       errorMessage = e.response!.data['message'];
+      print("failed");
       notifyListeners();
+      yield [];
     }
   }
 }

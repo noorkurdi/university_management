@@ -34,6 +34,32 @@ class DioHelper {
     );
   }
 
+  static Future<Response> changeEmail({
+    required Map<String, dynamic> data,
+    required String token,
+  }) async {
+    return await dio.post(
+      CHANGE_EMAIL,
+      data: data,
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+  }
+
+  static Future<Response> changePassword({
+    required Map<String, dynamic> data,
+    required String token,
+  }) async {
+    return await dio.post(
+      CHANGE_PASSWORD,
+      data: data,
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+  }
+
   /////////SUBJECTS///////////
   static Future<Response> mySubjects({
     required String token,
@@ -78,6 +104,17 @@ class DioHelper {
     return await dio.get(
       TODAY_SCHEUDLE,
       queryParameters: {"day": day},
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
+  }
+
+  static Future<Response> getSchedule({
+    required String token,
+  }) async {
+    return await dio.get(
+      SCHEUDLE,
       options: Options(
         headers: {'Authorization': 'Bearer $token'},
       ),

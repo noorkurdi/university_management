@@ -80,9 +80,9 @@ class MarksPage extends StatelessWidget {
                           label: CustomTableTitle(title: "التقدير"),
                         ),
                       ],
-                      rows: mySubjectsProvider.mySubjects == null
+                      rows: mySubjectsProvider.mySubjects.isEmpty
                           ? []
-                          : mySubjectsProvider.mySubjects!.map((e) {
+                          : mySubjectsProvider.mySubjects.map((e) {
                               return DataRow(cells: [
                                 DataCell(CustomTableInfoText(
                                   text: e.subject.name,

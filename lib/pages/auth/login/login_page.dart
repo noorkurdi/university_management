@@ -75,7 +75,7 @@ class LoginPage extends StatelessWidget {
                       height: 50,
                     ),
                     LoginForm(
-                      provider: provider,
+                      loginProvider: provider,
                     ),
                   ],
                 ),

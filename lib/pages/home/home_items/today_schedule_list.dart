@@ -33,8 +33,6 @@ class TodayScheduleList extends StatelessWidget {
                 itemCount: schedule.length,
                 itemBuilder: (context, index) {
                   return TodayScheduleCard(
-                    secondTitle: "وقت المادة :",
-                    thirdTitle: "القاعة :",
                     scheduleModel: schedule[index],
                   );
                 },

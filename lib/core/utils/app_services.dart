@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:university_management/core/utils/app_constants.dart';
 
 class AppServices {
   AppServices._();
@@ -30,6 +31,14 @@ class AppServices {
     return jsonList
         .map((item) => fromJson(item as Map<String, dynamic>))
         .toList();
+  }
+
+  static void clearEvent({
+    required List<TextEditingController> controller,
+  }) {
+    for (int i = 0; i < controller.length; i++) {
+      controller[i].clear();
+    }
   }
 
   static ScaffoldFeatureController<SnackBar, SnackBarClosedReason>
@@ -91,11 +100,21 @@ class AppValidations {
     }
   };
 
+  static String? Function(String?)? emailValidation = (value) {
+    if (value!.isEmpty || value == '') {
+      return "هذا الحقل مطلوب";
+    } else if (!AppRegExp.emailRegex.hasMatch(value)) {
+      return "البريد الالكتروني غير صالح";
+    } else {
+      return null;
+    }
+  };
+
   static passwordConfirmationValidation(String? value, String confirmation) {
     if (value!.isEmpty || value == '') {
-      return "This field is required";
+      return "هذا الحقل مطلوب";
     } else if (value != confirmation) {
-      return "Doesn't confirm the password";
+      return "يجب أن يتطابق مع كلمة السر";
     } else {
       return null;
     }

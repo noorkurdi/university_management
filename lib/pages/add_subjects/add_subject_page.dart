@@ -45,71 +45,62 @@ class AddSubjectsPage extends StatelessWidget {
           centerTitle: true,
           backgroundColor: AppColors.blueWpuColor,
         ),
-        body: notMySubjects.notMySubjects.isEmpty
-            ? const Center(
-                child: Text(
-                  "لا يوجد مواد",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30,
-                  ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              children: [
+                NotMySubjectsList(
+                  notMySubjects: notMySubjects,
+                  addSubjects: addSubjects,
                 ),
-              )
-            : SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    children: [
-                      NotMySubjectsList(
-                        notMySubjects: notMySubjects,
-                        addSubjects: addSubjects,
-                      ),
-                      addSubjects.connectionEnum == ConnectionEnum.connecting
-                          ? Center(
-                              child: CircularProgressIndicator(
-                                color: AppColors.blueWpuColor,
-                              ),
-                            )
-                          : CustomLinearButton(
-                              onTap: addSubjects.data.isEmpty
-                                  ? null
-                                  : () async {
-                                      await addSubjects.addSubjects(
-                                        onSuccess: () async {
-                                          AppServices.successSnackBar(
-                                            context: context,
-                                            title: "تم إضافة المواد بنجاح",
-                                          );
-                                        },
-                                        onError: () {
-                                          AppServices.errorSncakBar(
-                                            context: context,
-                                            title:
-                                                "حدث خطأ, الرجاء المحاولة مجدداً",
-                                          );
-                                        },
+                addSubjects.connectionEnum == ConnectionEnum.connecting
+                    ? Center(
+                        child: CircularProgressIndicator(
+                          color: AppColors.blueWpuColor,
+                        ),
+                      )
+                    : Visibility(
+                        visible: addSubjects.data.isNotEmpty,
+                        child: CustomLinearButton(
+                          onTap: addSubjects.data.isEmpty
+                              ? null
+                              : () async {
+                                  await addSubjects.addSubjects(
+                                    onSuccess: () async {
+                                      AppServices.successSnackBar(
+                                        context: context,
+                                        title: "تم إضافة المواد بنجاح",
                                       );
-                                      await notMySubjects.getNotMySubjects();
                                     },
-                              colors: [
-                                AppColors.blueWpuColor,
-                                const Color.fromARGB(255, 2, 46, 94)
-                              ],
-                              child: const Center(
-                                child: Text(
-                                  "إضافة",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
+                                    onError: () {
+                                      AppServices.errorSncakBar(
+                                        context: context,
+                                        title:
+                                            "حدث خطأ, الرجاء المحاولة مجدداً",
+                                      );
+                                    },
+                                  );
+                                },
+                          colors: [
+                            AppColors.blueWpuColor,
+                            const Color.fromARGB(255, 2, 46, 94)
+                          ],
+                          child: const Center(
+                            child: Text(
+                              "إضافة",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
                               ),
-                            )
-                    ],
-                  ),
-                ),
-              ),
+                            ),
+                          ),
+                        ),
+                      )
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

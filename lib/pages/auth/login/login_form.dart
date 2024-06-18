@@ -6,19 +6,21 @@ import 'package:university_management/core/utils/app_services.dart';
 import 'package:university_management/pages/root_page.dart';
 import 'package:university_management/provider/auth/login_provider.dart';
 import 'package:university_management/provider/auth/my_details_provider.dart';
+import 'package:university_management/provider/other/navigation_bar_provider.dart';
 import 'package:university_management/provider/schedule/today_schedule_provider.dart';
 import 'package:university_management/widgets/custom_linear_button.dart';
 import 'package:university_management/widgets/custom_text_field_widget.dart';
 import 'package:university_management/widgets/show_password_icon.dart';
 
 class LoginForm extends StatelessWidget {
-  const LoginForm({super.key, required this.provider});
+  const LoginForm({super.key, required this.loginProvider});
 
-  final LoginProvider provider;
+  final LoginProvider loginProvider;
   @override
   Widget build(BuildContext context) {
     final myDetails = Provider.of<MyDetalisProvider>(context);
     final todaySchedule = Provider.of<TodayScheduleProvider>(context);
+    final navigationBarProvider = Provider.of<NavigationBarProvider>(context);
     return Form(
       key: AppKeys.loginKey,
       child: Column(
@@ -28,13 +30,13 @@ class LoginForm extends StatelessWidget {
             isPassword: false,
             onFieldSubmitted: (value) {
               FocusScope.of(context).requestFocus(
-                provider.passwordFocusNode,
+                loginProvider.passwordFocusNode,
               );
             },
             textInputAction: TextInputAction.next,
             keyboardType: TextInputType.number,
-            focusNode: provider.uniNumberFocusNode,
-            inputController: provider.uniNumberController,
+            focusNode: loginProvider.uniNumberFocusNode,
+            inputController: loginProvider.uniNumberController,
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,
               LengthLimitingTextInputFormatter(9) // Specify the maximum length
@@ -52,13 +54,18 @@ class LoginForm extends StatelessWidget {
           ),
           CustomTextField(
             validation: AppValidations.requiredValidation,
-            isPassword: provider.isPasswordShow,
+            isPassword: loginProvider.isPasswordShow,
             keyboardType: TextInputType.visiblePassword,
-            focusNode: provider.passwordFocusNode,
+            focusNode: loginProvider.passwordFocusNode,
             textInputAction: TextInputAction.done,
             onFieldSubmitted: (value) async {
-              await provider.login(
+              await loginProvider.login(
                 onSuccess: () async {
+                  navigationBarProvider.currentHomeIndex = 3;
+                  AppServices.clearEvent(controller: [
+                    loginProvider.passwordController,
+                    loginProvider.uniNumberController,
+                  ]);
                   await myDetails.getMyDetails();
                   await todaySchedule.getTodaySchedule();
                   if (context.mounted) {
@@ -79,14 +86,14 @@ class LoginForm extends StatelessWidget {
                 },
               );
             },
-            inputController: provider.passwordController,
+            inputController: loginProvider.passwordController,
             hintText: "xxxxxxxxxx",
             primaryColor: Colors.black,
             labelText: "كلمة السر",
             suffixIcon: ShowPasswordIcon(
-              isVisible: provider.isPasswordShow,
+              isVisible: loginProvider.isPasswordShow,
               onPressed: () {
-                provider.showPassword();
+                loginProvider.showPassword();
               },
             ),
           ),
@@ -96,8 +103,13 @@ class LoginForm extends StatelessWidget {
           Center(
             child: CustomLinearButton(
               onTap: () async {
-                await provider.login(
+                await loginProvider.login(
                   onSuccess: () async {
+                    navigationBarProvider.currentHomeIndex = 3;
+                    AppServices.clearEvent(controller: [
+                      loginProvider.passwordController,
+                      loginProvider.uniNumberController,
+                    ]);
                     await myDetails.getMyDetails();
                     await todaySchedule.getTodaySchedule();
                     if (context.mounted) {
