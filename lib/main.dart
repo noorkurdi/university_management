@@ -64,6 +64,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'University management',
         theme: ThemeData(
           fontFamily: AppStrings.appFont,
