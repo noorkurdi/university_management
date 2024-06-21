@@ -57,7 +57,7 @@ class LoginPage extends StatelessWidget {
                             height: 40,
                           ),
                           Text(
-                            'تسجيل الدخول \n الى حسابك',
+                            'تسجيل الدخول \n إلى حسابك',
                             style: TextStyle(
                               color: Colors.white,
                               fontFamily: AppStrings.appFont,
@@ -66,7 +66,7 @@ class LoginPage extends StatelessWidget {
                                   context,
                                   fontSize: 30),
                             ),
-                            textAlign: TextAlign.end,
+                            textAlign: TextAlign.start,
                           ),
                         ],
                       ),
