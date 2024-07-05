@@ -125,95 +125,100 @@ class ProfilePage extends StatelessWidget {
                                                 isScrollControlled: true,
                                                 useSafeArea: true,
                                                 builder: (context) {
-                                                  return SizedBox(
-                                                    width: context.width,
-                                                    height: 160,
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              15.0),
-                                                      child: Form(
-                                                        key: AppKeys
-                                                            .changeEmailKey,
-                                                        child: Column(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceEvenly,
-                                                          children: [
-                                                            CustomTextField(
-                                                              isPassword: false,
-                                                              validation:
-                                                                  AppValidations
-                                                                      .emailValidation,
-                                                              suffixIcon: Icon(
-                                                                Icons.email,
-                                                                color: AppColors
-                                                                    .blueWpuColor,
-                                                              ),
-                                                              inputController:
-                                                                  changeEmail
-                                                                      .emailController,
-                                                              hintText:
-                                                                  "البريد الالكتروني",
-                                                            ),
-                                                            changeEmail.connectionEnum ==
-                                                                    ConnectionEnum
-                                                                        .connecting
-                                                                ? const Circular()
-                                                                : SizedBox(
-                                                                    width: double
-                                                                        .infinity,
-                                                                    child:
-                                                                        ElevatedButton(
-                                                                      style: ElevatedButton
-                                                                          .styleFrom(
-                                                                        backgroundColor:
-                                                                            AppColors.blueWpuColor,
-                                                                        shape:
-                                                                            RoundedRectangleBorder(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(8),
-                                                                        ),
-                                                                      ),
-                                                                      onPressed:
-                                                                          () async {
-                                                                        Navigator.pop(
-                                                                            context);
-                                                                        await changeEmail
-                                                                            .changeEmail(
-                                                                          onSuccess:
+                                                  return Padding(
+                                                    padding: EdgeInsets.only(
+                                                        bottom: MediaQuery.of(
+                                                                context)
+                                                            .viewInsets
+                                                            .bottom),
+                                                    child:
+                                                        SingleChildScrollView(
+                                                      child: SizedBox(
+                                                        width: context.width,
+                                                        height: 160,
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(15.0),
+                                                          child: Form(
+                                                            key: AppKeys
+                                                                .changeEmailKey,
+                                                            child: Column(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceEvenly,
+                                                              children: [
+                                                                CustomTextField(
+                                                                  isPassword:
+                                                                      false,
+                                                                  validation:
+                                                                      AppValidations
+                                                                          .emailValidation,
+                                                                  suffixIcon:
+                                                                      Icon(
+                                                                    Icons.email,
+                                                                    color: AppColors
+                                                                        .blueWpuColor,
+                                                                  ),
+                                                                  inputController:
+                                                                      changeEmail
+                                                                          .emailController,
+                                                                  hintText:
+                                                                      "البريد الالكتروني",
+                                                                ),
+                                                                changeEmail.connectionEnum ==
+                                                                        ConnectionEnum
+                                                                            .connecting
+                                                                    ? const Circular()
+                                                                    : SizedBox(
+                                                                        width: double
+                                                                            .infinity,
+                                                                        child:
+                                                                            ElevatedButton(
+                                                                          style:
+                                                                              ElevatedButton.styleFrom(
+                                                                            backgroundColor:
+                                                                                AppColors.blueWpuColor,
+                                                                            shape:
+                                                                                RoundedRectangleBorder(
+                                                                              borderRadius: BorderRadius.circular(8),
+                                                                            ),
+                                                                          ),
+                                                                          onPressed:
                                                                               () async {
-                                                                            await myDetails.getMyDetails();
-                                                                            if (context.mounted) {
-                                                                              AppServices.successSnackBar(
-                                                                                context: context,
-                                                                                title: "تم تعديل البريد الالكتروني بنجاح",
-                                                                              );
-                                                                            }
-                                                                          },
-                                                                          onError:
-                                                                              () {
-                                                                            AppServices.errorSncakBar(
-                                                                              context: context,
-                                                                              title: changeEmail.errorMessage,
+                                                                            Navigator.pop(context);
+                                                                            await changeEmail.changeEmail(
+                                                                              onSuccess: () async {
+                                                                                await myDetails.getMyDetails();
+                                                                                if (context.mounted) {
+                                                                                  AppServices.successSnackBar(
+                                                                                    context: context,
+                                                                                    title: "تم تعديل البريد الالكتروني بنجاح",
+                                                                                  );
+                                                                                }
+                                                                              },
+                                                                              onError: () {
+                                                                                AppServices.errorSncakBar(
+                                                                                  context: context,
+                                                                                  title: changeEmail.errorMessage,
+                                                                                );
+                                                                              },
                                                                             );
                                                                           },
-                                                                        );
-                                                                      },
-                                                                      child:
-                                                                          const Text(
-                                                                        "تعديل",
-                                                                        style:
-                                                                            TextStyle(
-                                                                          color:
-                                                                              Colors.white,
-                                                                          fontWeight:
-                                                                              FontWeight.bold,
+                                                                          child:
+                                                                              const Text(
+                                                                            "تعديل",
+                                                                            style:
+                                                                                TextStyle(
+                                                                              color: Colors.white,
+                                                                              fontWeight: FontWeight.bold,
+                                                                            ),
+                                                                          ),
                                                                         ),
                                                                       ),
-                                                                    ),
-                                                                  ),
-                                                          ],
+                                                              ],
+                                                            ),
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
@@ -264,131 +269,142 @@ class ProfilePage extends StatelessWidget {
                                                 isScrollControlled: true,
                                                 useSafeArea: true,
                                                 builder: (context) {
-                                                  return SizedBox(
-                                                    width: context.width,
-                                                    height: 340,
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              15.0),
-                                                      child: Form(
-                                                        key: AppKeys
-                                                            .changePasswordKey,
-                                                        child: Column(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceEvenly,
-                                                          children: [
-                                                            CustomTextField(
-                                                              isPassword: false,
-                                                              validation:
-                                                                  AppValidations
-                                                                      .requiredValidation,
-                                                              suffixIcon: Icon(
-                                                                Icons.password,
-                                                                color: AppColors
-                                                                    .blueWpuColor,
-                                                              ),
-                                                              inputController:
-                                                                  changePassword
-                                                                      .oldPasswordController,
-                                                              hintText:
-                                                                  "كلمة السر القديمة",
-                                                            ),
-                                                            CustomTextField(
-                                                              isPassword: false,
-                                                              validation:
-                                                                  AppValidations
-                                                                      .requiredValidation,
-                                                              suffixIcon: Icon(
-                                                                Icons.password,
-                                                                color: AppColors
-                                                                    .blueWpuColor,
-                                                              ),
-                                                              inputController:
-                                                                  changePassword
-                                                                      .newPasswordController,
-                                                              hintText:
-                                                                  "كلمة السر الجديدة",
-                                                            ),
-                                                            CustomTextField(
-                                                              isPassword: false,
-                                                              validation:
-                                                                  (value) {
-                                                                return AppValidations
-                                                                    .passwordConfirmationValidation(
+                                                  return Padding(
+                                                    padding: EdgeInsets.only(
+                                                        bottom: MediaQuery.of(
+                                                                context)
+                                                            .viewInsets
+                                                            .bottom),
+                                                    child:
+                                                        SingleChildScrollView(
+                                                      child: SizedBox(
+                                                        width: context.width,
+                                                        height: 340,
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(15.0),
+                                                          child: Form(
+                                                            key: AppKeys
+                                                                .changePasswordKey,
+                                                            child: Column(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceEvenly,
+                                                              children: [
+                                                                CustomTextField(
+                                                                  isPassword:
+                                                                      false,
+                                                                  validation:
+                                                                      AppValidations
+                                                                          .requiredValidation,
+                                                                  suffixIcon:
+                                                                      Icon(
+                                                                    Icons
+                                                                        .password,
+                                                                    color: AppColors
+                                                                        .blueWpuColor,
+                                                                  ),
+                                                                  inputController:
+                                                                      changePassword
+                                                                          .oldPasswordController,
+                                                                  hintText:
+                                                                      "كلمة السر القديمة",
+                                                                ),
+                                                                CustomTextField(
+                                                                  isPassword:
+                                                                      false,
+                                                                  validation:
+                                                                      AppValidations
+                                                                          .requiredValidation,
+                                                                  suffixIcon:
+                                                                      Icon(
+                                                                    Icons
+                                                                        .password,
+                                                                    color: AppColors
+                                                                        .blueWpuColor,
+                                                                  ),
+                                                                  inputController:
+                                                                      changePassword
+                                                                          .newPasswordController,
+                                                                  hintText:
+                                                                      "كلمة السر الجديدة",
+                                                                ),
+                                                                CustomTextField(
+                                                                  isPassword:
+                                                                      false,
+                                                                  validation:
+                                                                      (value) {
+                                                                    return AppValidations.passwordConfirmationValidation(
                                                                         value,
                                                                         changePassword
                                                                             .newPasswordController
                                                                             .text);
-                                                              },
-                                                              suffixIcon: Icon(
-                                                                Icons.password,
-                                                                color: AppColors
-                                                                    .blueWpuColor,
-                                                              ),
-                                                              inputController:
-                                                                  changePassword
-                                                                      .newPasswordConfirmController,
-                                                              hintText:
-                                                                  "تأكيد كلمة السر",
-                                                            ),
-                                                            changePassword
-                                                                        .connectionEnum ==
-                                                                    ConnectionEnum
-                                                                        .connecting
-                                                                ? const Circular()
-                                                                : SizedBox(
-                                                                    width: double
-                                                                        .infinity,
-                                                                    child:
-                                                                        ElevatedButton(
-                                                                      style: ElevatedButton
-                                                                          .styleFrom(
-                                                                        backgroundColor:
-                                                                            AppColors.blueWpuColor,
-                                                                        shape:
-                                                                            RoundedRectangleBorder(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(8),
-                                                                        ),
-                                                                      ),
-                                                                      onPressed:
-                                                                          () async {
-                                                                        Navigator.pop(
-                                                                            context);
-                                                                        await changePassword
-                                                                            .changePassword(
-                                                                          onSuccess:
-                                                                              () async {
-                                                                            AppServices.successSnackBar(
-                                                                              context: context,
-                                                                              title: "تم تغيير كلمة السر",
-                                                                            );
-                                                                          },
-                                                                          onError:
-                                                                              () {
-                                                                            AppServices.errorSncakBar(
-                                                                              context: context,
-                                                                              title: changePassword.errorMessage,
-                                                                            );
-                                                                          },
-                                                                        );
-                                                                      },
-                                                                      child:
-                                                                          const Text(
-                                                                        "تغيير كلمة السر",
-                                                                        style:
-                                                                            TextStyle(
-                                                                          color:
-                                                                              Colors.white,
-                                                                          fontWeight:
-                                                                              FontWeight.bold,
-                                                                        ),
-                                                                      ),
-                                                                    ),
+                                                                  },
+                                                                  suffixIcon:
+                                                                      Icon(
+                                                                    Icons
+                                                                        .password,
+                                                                    color: AppColors
+                                                                        .blueWpuColor,
                                                                   ),
-                                                          ],
+                                                                  inputController:
+                                                                      changePassword
+                                                                          .newPasswordConfirmController,
+                                                                  hintText:
+                                                                      "تأكيد كلمة السر",
+                                                                ),
+                                                                changePassword
+                                                                            .connectionEnum ==
+                                                                        ConnectionEnum
+                                                                            .connecting
+                                                                    ? const Circular()
+                                                                    : SizedBox(
+                                                                        width: double
+                                                                            .infinity,
+                                                                        child:
+                                                                            ElevatedButton(
+                                                                          style:
+                                                                              ElevatedButton.styleFrom(
+                                                                            backgroundColor:
+                                                                                AppColors.blueWpuColor,
+                                                                            shape:
+                                                                                RoundedRectangleBorder(
+                                                                              borderRadius: BorderRadius.circular(8),
+                                                                            ),
+                                                                          ),
+                                                                          onPressed:
+                                                                              () async {
+                                                                            Navigator.pop(context);
+                                                                            await changePassword.changePassword(
+                                                                              onSuccess: () async {
+                                                                                AppServices.successSnackBar(
+                                                                                  context: context,
+                                                                                  title: "تم تغيير كلمة السر",
+                                                                                );
+                                                                              },
+                                                                              onError: () {
+                                                                                AppServices.errorSncakBar(
+                                                                                  context: context,
+                                                                                  title: changePassword.errorMessage,
+                                                                                );
+                                                                              },
+                                                                            );
+                                                                          },
+                                                                          child:
+                                                                              const Text(
+                                                                            "تغيير كلمة السر",
+                                                                            style:
+                                                                                TextStyle(
+                                                                              color: Colors.white,
+                                                                              fontWeight: FontWeight.bold,
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                              ],
+                                                            ),
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
