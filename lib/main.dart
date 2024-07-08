@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'University management',
+        title: 'WPU',
         theme: ThemeData(
           fontFamily: AppStrings.appFont,
         ),
