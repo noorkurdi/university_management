@@ -480,16 +480,15 @@ class ProfilePage extends StatelessWidget {
                       children: [
                         IconButton(
                           onPressed: () async {
-                            if (context.mounted) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => AddSubjectsPage(
-                                    notMySubjects: notMySubjectsProvider,
-                                  ),
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AddSubjectsPage(
+                                  notMySubjects: notMySubjectsProvider,
                                 ),
-                              );
-                            }
+                              ),
+                            );
+                            await notMySubjectsProvider.getNotMySubjects();
                           },
                           icon: const Icon(
                             Icons.add,

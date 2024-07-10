@@ -23,7 +23,7 @@ class NotMySubjectsList extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData && snapshot.data!.isNotEmpty) {
           return SizedBox(
-            height: 550,
+            height: (70 * snapshot.data!.length) + 10,
             width: double.infinity,
             child: ListView.separated(
               itemBuilder: (context, index) {
